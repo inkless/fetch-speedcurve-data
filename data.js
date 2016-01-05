@@ -1,9 +1,43 @@
+#!/usr/local/bin/node
+
 var fs = require('fs');
 var _ = require('lodash');
+var file = process.argv[2];
+var execFileSync = require('child_process').execFileSync;
+var moment = require('moment');
+if (!file) {
+	var currentDate = moment().format('MMDD')
+	console.log(`Fetching data from speedcurve for today: ${currentDate}`);
+	execFileSync(`${__dirname}/fetch.sh`);
+	file = currentDate + '.json';
+} else {
+	console.log(`Using existing data: ${file}`);
+}
 
-var content = fs.readFileSync(`${__dirname}/1228.json`);
+var content = fs.readFileSync(`${__dirname}/${file}`);
 var data = JSON.parse(content);
-var printOrder = 'Boll and Branch,Diamond Candles,drinkhint,fijiwater,Neff,Peter Millar,The Elephant Pants,Blunt USA,bumbleride,Chilitechnology,Gatorade Endurance,kravejerky,rockflowerpaper,Sebamed,Vintage Marquee Lights';
+var printOrder = [
+	// tier 1
+	'J Brand Jeans',
+	'Peter Millar',
+	'Neff',
+	'Fiji Water',
+	'The Elephant Pants',
+	'Diamond Candles',
+	'Boll & Branch',
+	'Hint Water',
+	// tier 2
+	'Blunt USA',
+	'Gatorade Endurance',
+	'Vintage Marquee Lights',
+	'Krave Jerky',
+	'Sebamed',
+	'Bumbleride',
+	'Chili Technology',
+	'Rock Flower Paper',
+	// Amazon
+	'Amazon'
+];
 
 var result = _(data.sites).map(function(site) {
 	return [site.name, {
@@ -14,7 +48,7 @@ var result = _(data.sites).map(function(site) {
 	}];
 }).zipObject().value();
 
-var orderedResult = _.map(printOrder.split(','), function(name) {
+var orderedResult = _.map(printOrder, function(name) {
 	return result[name];
 });
 
@@ -29,10 +63,12 @@ function changeToSecond(v) {
 }
 
 function printTable(printOrder, orderedResult) {
-	var titleLine = "\t" + ['pagespeed', 'render', 'dom', 'size'].join("\t");
-	var siteNames = printOrder.split(',');
-	var content = _.map(siteNames, function(name, index) {
+	var titleLine = "\t" + ['brand', 'pagespeed', 'render', 'dom', 'size'].join("\t");
+	var content = _.map(printOrder, function(name, index) {
 		var data = orderedResult[index];
+		if (!data) {
+			console.log('No data in site:', name);
+		}
 		return name + "\t" + data.pagespeed + "\t" + data.render + "\t" +
 			data.dom + "\t" + data.size;
 	}).join("\n");
@@ -41,4 +77,7 @@ function printTable(printOrder, orderedResult) {
 	console.log(content);
 }
 
+console.log('---------');
+console.log(' Result:');
+console.log('---------');
 printTable(printOrder, orderedResult);
