@@ -5,7 +5,12 @@ Fetch speedcurve data
 2. Execute following command in terminal:
 ```bash
 npm install
-./data.js
+#fetch home page data
+./speedcurve home
+#fetch store page data
+./speedcurve store
+#fetch product page data
+./speedcurve product
 ```
 
 
