@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+var fs = require('fs');
+var minimist = require('minimist');
+
+var CONSTANT = require('./constant');
+var fetchUrlIds = require('./fetch_url_ids');
+var fetchTestResult = require('./fetch_test_result');
+var print = require('./print');
+
+var argv = minimist(process.argv.slice(2));
+var type = argv._[0];
+var days = parseInt(argv.days || 7);
+
+var options = {
+  days: days
+};
+
+if (!type || !~['home', 'store', 'product'].indexOf(type)) {
+  console.log('please specify a type: home, store or product');
+  return;
+}
+
+function fetchResult() {
+  var urlIds = require(CONSTANT.URL_IDS_SAVE_DEST);
+  fetchTestResult(urlIds, type, options, print);
+}
+
+try {
+  fs.statSync(CONSTANT.URL_IDS_SAVE_DEST);
+} catch(e) {
+  fetchUrlIds(fetchResult);
+  return;
+}
+
+fetchResult();
