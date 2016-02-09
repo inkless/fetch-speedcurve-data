@@ -13,4 +13,7 @@ npm install
 ./speedcurve product
 ```
 
+Notice: the output can be copy and paste directly to spreadsheet, and it will still maitain a good format.
+
+
 
