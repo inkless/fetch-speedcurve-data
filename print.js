@@ -1,27 +1,6 @@
 var _ = require('lodash');
 
-var printOrder = [
-  // tier 1
-  'jbrandjeans',
-  'petermillar',
-  'neffheadwear',
-  'fijiwater',
-  'theelephantpants',
-  'diamondcandles',
-  'bollandbranch',
-  'drinkhint',
-  // tier 2
-  'bluntusa',
-  'gatoradeendurance',
-  'vintagemarqueelights',
-  'kravejerky',
-  'sebamedusa',
-  'bumbleride',
-  'chilitechnology',
-  'rockflowerpaper',
-  // Amazon
-  'amazon'
-];
+var printOrder = require('./site-config');
 
 function printTable(printOrder, orderedData) {
   var titleLine = "\t" + ['brand', 'pagespeed', 'render', 'dom', 'size'].join("\t");

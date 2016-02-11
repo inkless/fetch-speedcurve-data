@@ -3,6 +3,7 @@ var _ = require('lodash');
 var moment = require('moment');
 var path = require('path');
 var fs = require('fs');
+var CONSTANT = require('./constant');
 
 var callApi = require('./utils').callApi;
 
@@ -68,9 +69,10 @@ function fetch(urls, days, resultSaveDest, callback) {
 
 module.exports = function(allUrls, type, options, callback) {
 
-  var resultSaveDest = path.join(__dirname, 'data/' + type + '-' + moment().format("YYYYMMDD") + '.json');
   var urls = allUrls[type];
   var days = options.days;
+  var resultSaveDest = path.join(CONSTANT.CACHE_DIR, type + '-' + moment().format("YYYYMMDD") + '-' + days + '.json');
+  
 
   try {
     fs.statSync(resultSaveDest);

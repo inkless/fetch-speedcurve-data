@@ -26,6 +26,13 @@ function fetchResult() {
 }
 
 try {
+  fs.statSync(CONSTANT.CACHE_DIR);
+} catch(e) {
+  fs.mkdirSync(CONSTANT.CACHE_DIR);
+  console.log('Cache created...');
+}
+
+try {
   fs.statSync(CONSTANT.URL_IDS_SAVE_DEST);
 } catch(e) {
   fetchUrlIds(fetchResult);
