@@ -62,7 +62,9 @@ function fetch(urls, days, resultSaveDest, callback) {
           size: (calcAverage(urlTestData.tests, 'size')/1024).toFixed()
         };
       });
-      fs.writeFileSync(resultSaveDest, JSON.stringify(result));
+      if (!_.isEmpty(result)) {
+        fs.writeFileSync(resultSaveDest, JSON.stringify(result));
+      }
       callback(result);
     });
 
