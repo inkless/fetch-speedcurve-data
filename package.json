@@ -1,0 +1,27 @@
+{
+  "name": "speedcurve",
+  "version": "1.0.0",
+  "description": "Fetch speedcurve data =====================",
+  "main": "speedcurve",
+  "dependencies": {
+    "lodash": "^4.5.0",
+    "minimist": "^1.2.0",
+    "moment": "^2.11.2",
+    "promise": "^7.1.1",
+    "request": "^2.69.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkless/fetch-speedcurve-data.git"
+  },
+  "author": "Guangda Zhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inkless/fetch-speedcurve-data/issues"
+  },
+  "homepage": "https://github.com/inkless/fetch-speedcurve-data"
+}
