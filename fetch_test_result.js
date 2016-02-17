@@ -52,15 +52,16 @@ function fetch(urls, days, resultSaveDest, callback) {
   console.log('start to fetch url data...');
   Promise.all(promises)
     .then(function(res) {
-      var result = _(res).map(function(urlTestData) {
+      var result = {};
+      res.forEach(function(urlTestData) {
         var domain = urlTestData.url.match(/^https?:\/\/[-\w]+\.(\w+)\.com.*/)[1];
-        return [domain, {
+        result[domain] = {
           pagespeed: calcAverage(urlTestData.tests, 'pagespeed').toFixed(),
           render: changeToSecond(calcAverage(urlTestData.tests, 'render')),
           dom: changeToSecond(calcAverage(urlTestData.tests, 'dom')),
           size: (calcAverage(urlTestData.tests, 'size')/1024).toFixed()
-        }];
-      }).zipObject().value();
+        };
+      });
       fs.writeFileSync(resultSaveDest, JSON.stringify(result));
       callback(result);
     });
@@ -72,7 +73,7 @@ module.exports = function(allUrls, type, options, callback) {
   var urls = allUrls[type];
   var days = options.days;
   var resultSaveDest = path.join(CONSTANT.CACHE_DIR, type + '-' + moment().format("YYYYMMDD") + '-' + days + '.json');
-  
+
 
   try {
     fs.statSync(resultSaveDest);
