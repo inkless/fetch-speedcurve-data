@@ -10,6 +10,9 @@ var callApi = require('./utils').callApi;
 function fetchOne(urlId, days) {
   return new Promise(function(resolve, reject) {
     callApi('urls/' + urlId + '?days=' + days, function(data) {
+      data.tests = _.filter(data.tests, function(o) {
+        return ['Chrome', 'Apple iPad Landscape', 'Apple iPhone 5'].indexOf(o.browser) !== -1;
+      });
       resolve(data);
     }, function(err) {
       reject(err);

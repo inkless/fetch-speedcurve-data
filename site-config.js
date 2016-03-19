@@ -8,9 +8,9 @@ module.exports = [
   'diamondcandles',
   'bollandbranch',
   'drinkhint',
+  'gatoradeendurance',
   // tier 2
   'bluntusa',
-  'gatoradeendurance',
   'vintagemarqueelights',
   'kravejerky',
   'sebamedusa',
