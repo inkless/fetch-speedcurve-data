@@ -19,6 +19,7 @@ module.exports = [
   'rockflowerpaper',
   'hillflint',
   'getgrinds',
+  'kettleandfire',
   // Amazon
   'amazon'
 ];
