@@ -1,25 +1,26 @@
 module.exports = [
-  // tier 1
+  // high custom
   'jbrandjeans',
   'petermillar',
   'neffheadwear',
+  'hillflint',
   'fijiwater',
   'theelephantpants',
   'diamondcandles',
   'bollandbranch',
   'drinkhint',
-  'gatoradeendurance',
-  // tier 2
-  'bluntusa',
-  'vintagemarqueelights',
-  'kravejerky',
-  'sebamedusa',
   'bumbleride',
+  // low custom
+  'gatoradeendurance',
+  'kravejerky',
+  'vintagemarqueelights',
+  'sebamedusa',
   'chilitechnology',
   'rockflowerpaper',
-  'hillflint',
-  'getgrinds',
   'kettleandfire',
+  'bluntusa',
+  // baseline
+  'kiwitea',
   // Amazon
   'amazon'
 ];

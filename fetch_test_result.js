@@ -57,7 +57,7 @@ function fetch(urls, days, resultSaveDest, callback) {
     .then(function(res) {
       var result = {};
       res.forEach(function(urlTestData) {
-        var domain = urlTestData.url.match(/^https?:\/\/[-\w]+\.(\w+)\.com.*/)[1];
+        var domain = urlTestData.url.match(/^https?:\/\/[-\w]+\.([-\w]+)\.com?.*/)[1];
         result[domain] = {
           pagespeed: calcAverage(urlTestData.tests, 'pagespeed').toFixed(),
           render: changeToSecond(calcAverage(urlTestData.tests, 'render')),

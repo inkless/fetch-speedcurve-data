@@ -13,6 +13,7 @@ exports.callApi = function(params, callback, errorCb) {
     if (!error && response.statusCode == 200) {
       callback(JSON.parse(body));
     } else {
+      console.log(error);
       errorCb && errorCb(error);
     }
   });
