@@ -79,7 +79,7 @@ function fetch(urls, days, browsers, resultSaveDest, callback) {
 
 module.exports = function(allUrls, type, options, callback) {
 
-  var urls = allUrls[type];
+  var urls = _.filter(allUrls[type]);
   var days = options.days;
   var browsers = options.browsers;
   var ignoreCache = options.ignoreCache;
