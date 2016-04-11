@@ -11,6 +11,10 @@ npm install
 ./speedcurve store
 #fetch product page data
 ./speedcurve product
+#ignore cache
+./speedcurve home --ignore-cache
+#run for all browsers, by default its only Chrome
+./speedcuve home --all-browsers
 ```
 
 Notice: the output can be copy and paste directly to spreadsheet, and it will still maitain a good format.
