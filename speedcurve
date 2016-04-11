@@ -10,10 +10,21 @@ var print = require('./print');
 var argv = minimist(process.argv.slice(2));
 var type = argv._[0];
 var days = parseInt(argv.days || 7);
+var ignoreCache = argv['ignore-cache'];
 
 var options = {
-  days: days
+  days: days,
+  browsers: 'Chrome',
+  ignoreCache: ignoreCache
 };
+
+if (argv.browsers) {
+  options.browsers = argv.browsers;
+}
+
+if (argv['all-browsers']) {
+  options.browsers = 'all';
+}
 
 if (!type || !~['home', 'store', 'product'].indexOf(type)) {
   console.log('please specify a type: home, store or product');
@@ -32,11 +43,17 @@ try {
   console.log('Cache created...');
 }
 
-try {
-  fs.statSync(CONSTANT.URL_IDS_SAVE_DEST);
-} catch(e) {
-  fetchUrlIds(fetchResult);
-  return;
+var shouldFetch = ignoreCache;
+if (!shouldFetch) {
+  try {
+    fs.statSync(CONSTANT.URL_IDS_SAVE_DEST);
+  } catch(e) {
+    shouldFetch = true;
+  }
 }
 
-fetchResult();
+if (shouldFetch) {
+  fetchUrlIds(fetchResult);
+} else {
+  fetchResult();
+}

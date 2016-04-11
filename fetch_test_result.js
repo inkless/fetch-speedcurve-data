@@ -7,11 +7,15 @@ var CONSTANT = require('./constant');
 
 var callApi = require('./utils').callApi;
 
-function fetchOne(urlId, days) {
+function fetchOne(urlId, days, browsers) {
   return new Promise(function(resolve, reject) {
     callApi('urls/' + urlId + '?days=' + days, function(data) {
       data.tests = _.filter(data.tests, function(o) {
-        return ['Chrome', 'Apple iPad Landscape', 'Apple iPhone 5'].indexOf(o.browser) !== -1;
+        if (browsers === 'all') {
+          return ['Chrome', 'Apple iPad Landscape', 'Apple iPhone 5'].indexOf(o.browser) !== -1;
+        } else {
+          return o.browser === browsers;
+        }
       });
       resolve(data);
     }, function(err) {
@@ -30,9 +34,9 @@ function changeToSecond(v) {
   return (v / 1000).toFixed(1);
 }
 
-function fetch(urls, days, resultSaveDest, callback) {
+function fetch(urls, days, browsers, resultSaveDest, callback) {
   var promises = _.map(urls, function(urlData) {
-    return fetchOne(urlData.url_id, days);
+    return fetchOne(urlData.url_id, days, browsers);
   });
 
   // based on the api capacity, if it does not support this many requests
@@ -77,16 +81,23 @@ module.exports = function(allUrls, type, options, callback) {
 
   var urls = allUrls[type];
   var days = options.days;
+  var browsers = options.browsers;
+  var ignoreCache = options.ignoreCache;
   var resultSaveDest = path.join(CONSTANT.CACHE_DIR, type + '-' + moment().format("YYYYMMDD") + '-' + days + '.json');
 
-
-  try {
-    fs.statSync(resultSaveDest);
-  } catch(e) {
-    fetch(urls, days, resultSaveDest, callback);
-    return;
+  var shouldFetch = ignoreCache;
+  if (!shouldFetch) {
+    try {
+      fs.statSync(resultSaveDest);
+    } catch(e) {
+      shouldFetch = true;
+    }
   }
 
-  callback(require(resultSaveDest));
+  if (shouldFetch) {
+    fetch(urls, days, browsers, resultSaveDest, callback);
+  } else {
+    callback(require(resultSaveDest));
+  }
 
 };
