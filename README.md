@@ -15,6 +15,8 @@ npm install
 ./speedcurve home --ignore-cache
 #run for all browsers, by default its only Chrome
 ./speedcuve home --all-browsers
+#run for mobile
+./speedcurve home --browsers=mobile
 ```
 
 Notice: the output can be copy and paste directly to spreadsheet, and it will still maitain a good format.

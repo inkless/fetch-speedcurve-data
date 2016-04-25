@@ -13,6 +13,8 @@ function fetchOne(urlId, days, browsers) {
       data.tests = _.filter(data.tests, function(o) {
         if (browsers === 'all') {
           return ['Chrome', 'Apple iPad Landscape', 'Apple iPhone 5'].indexOf(o.browser) !== -1;
+        } else if (browsers === 'mobile') {
+          return ['Apple iPad Landscape', 'Apple iPhone 5'].indexOf(o.browser) !== -1;
         } else {
           return o.browser === browsers;
         }
