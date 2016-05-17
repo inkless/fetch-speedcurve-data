@@ -10,6 +10,7 @@ module.exports = [
   'bollandbranch',
   'drinkhint',
   'bumbleride',
+  'fatco',
   // low custom
   'gatoradeendurance',
   'kravejerky',
