@@ -11,6 +11,7 @@ module.exports = [
   'drinkhint',
   'bumbleride',
   'fatco',
+  'criquetshirts',
   // low custom
   'gatoradeendurance',
   'kravejerky',
