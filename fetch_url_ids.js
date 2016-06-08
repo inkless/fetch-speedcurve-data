@@ -7,32 +7,36 @@ var callApi = require('./utils').callApi;
 module.exports = function fetchAllUrls(callback) {
   console.log('start to fetch url ids...');
   callApi('sites?days=1', function(data) {
-    var homeUrls = [];
-    var storeUrls = [];
-    var productUrls = [];
-
-    data.sites.forEach(function(site) {
-      if (site.site_id === 4962) {
-        homeUrls.push(site.urls[1]);
-        storeUrls.push(site.urls[0]);
-        productUrls.push(site.urls[2]);
-      } else {
-        homeUrls.push(site.urls[0]);
-        storeUrls.push(site.urls[1]);
-        productUrls.push(site.urls[2]);
-      }
-    });
-
-    var data = {
-      home: homeUrls,
-      store: storeUrls,
-      product: productUrls
+    var toSaveData = {
+      home: [],
+      store: [],
+      product: [],
     };
 
-    fs.writeFileSync(CONSTANT.URL_IDS_SAVE_DEST, JSON.stringify(data));
+    data.sites.forEach(function(site) {
+      site.urls.forEach(function(urlObj, index) {
+        var type = getType(urlObj.label);
+        toSaveData[type].push(urlObj);
+      });
+    });
+
+    fs.writeFileSync(CONSTANT.URL_IDS_SAVE_DEST, JSON.stringify(toSaveData));
 
     if (callback) {
       callback();
     }
   });
 };
+
+function getType(label) {
+  label = label.toLowerCase();
+  if (label.indexOf('store') !== -1 || label.indexOf('category') !== -1) {
+    return 'store';
+  }
+
+  if (label.indexOf('product') !== -1) {
+    return 'product';
+  }
+
+  return 'home';
+}
