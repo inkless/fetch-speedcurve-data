@@ -29,6 +29,7 @@ module.exports = function fetchAllUrls(callback) {
 };
 
 function getType(label) {
+  label = label || 'home';
   label = label.toLowerCase();
   if (label.indexOf('store') !== -1 || label.indexOf('category') !== -1) {
     return 'store';
