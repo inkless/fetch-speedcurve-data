@@ -21,6 +21,7 @@ module.exports = [
   'rockflowerpaper',
   'kettleandfire',
   'bluntusa',
+  'califiafarms',
   // baseline
   'kiwitea',
   // Amazon
