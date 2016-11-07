@@ -13,8 +13,9 @@ module.exports = [
   'fatco',
   'criquetshirts',
   // low custom
-  'gatoradeendurance',
+  'gatorade',
   'kravejerky',
+  'heidiklumintimates',
   'vintagemarqueelights',
   'sebamedusa',
   'chilitechnology',
@@ -25,5 +26,5 @@ module.exports = [
   // baseline
   'kiwitea',
   // Amazon
-  'amazon'
+  'amazon',
 ];
