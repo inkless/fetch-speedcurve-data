@@ -14,6 +14,7 @@ module.exports = [
   'criquetshirts',
   // low custom
   'gatorade',
+  'fredericks',
   'kravejerky',
   'heidiklumintimates',
   'vintagemarqueelights',

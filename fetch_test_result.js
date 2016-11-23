@@ -63,7 +63,7 @@ function fetch(urls, days, browsers, resultSaveDest, callback) {
     .then(function(res) {
       var result = {};
       res.forEach(function(urlTestData) {
-        var domain = urlTestData.url.match(/^https?:\/\/[-\w]+\.([-\w]+)\.com?.*/)[1];
+        var domain = urlTestData.url.match(/^https?:\/\/(?:[-\w]+\.)?([-\w]+)\.com?.*/)[1];
         result[domain] = {
           pagespeed: calcAverage(urlTestData.tests, 'pagespeed').toFixed(),
           render: changeToSecond(calcAverage(urlTestData.tests, 'render')),
@@ -85,7 +85,7 @@ module.exports = function(allUrls, type, options, callback) {
   var days = options.days;
   var browsers = options.browsers;
   var ignoreCache = options.ignoreCache;
-  var resultSaveDest = path.join(CONSTANT.CACHE_DIR, type + '-' + moment().format("YYYYMMDD") + '-' + days + '.json');
+  var resultSaveDest = path.join(CONSTANT.CACHE_DIR, type + '-' + moment().format('YYYYMMDD') + '-' + days + '.json');
 
   var shouldFetch = ignoreCache;
   if (!shouldFetch) {
