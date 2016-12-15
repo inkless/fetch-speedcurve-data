@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  textarea(rows=30 cols=40)= sites
+  div
+    button submit
+  hr
+  div
+    a(href="/") back
+  script(type='text/javascript' src='https://code.jquery.com/jquery-2.2.4.min.js')
+  script(type='text/javascript' src='/javascripts/edit.js')

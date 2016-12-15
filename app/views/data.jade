@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1=('Data for '+type)
+  table
+    tr
+      th brand
+      th pagespeed
+      th render
+      th dom
+      th size
+    each site in pageData
+      tr
+        td=site.name
+        td=site.pagespeed
+        td=site.render
+        td=site.dom
+        td=site.size
+  div
+    a(href="/") back
+
+
+

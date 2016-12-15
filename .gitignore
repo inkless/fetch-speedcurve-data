@@ -1,2 +1,4 @@
 node_modules
-/cache
+app/fetch/cache
+
+.DS_Store

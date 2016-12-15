@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  ul
+    li
+      a(href="/data?type=home") pagespeed for home page
+      ||
+      a(href="/data?type=home&ignoreCache=true") (without cache)
+    li
+      a(href="/data?type=store") pagespeed for category page
+      ||
+      a(href="/data?type=store&ignoreCache=true") (without cache)
+    li
+      a(href="/data?type=product") pagespeed for product page
+      ||
+      a(href="/data?type=product&ignoreCache=true") (without cache)
+  p
+    a(href="/edit") edit site config
